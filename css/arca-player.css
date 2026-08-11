@@ -1,0 +1,1731 @@
+/* ==========================================================================
+   ARCA PLAYER DESIGN SYSTEM — STYLESHEET
+   Módulo de Reproductor Multimedia de Radio Streaming (Audio, Video, Letras)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. PLAYER LAYOUT & CONTAINERS
+   -------------------------------------------------------------------------- */
+.player-page-layout {
+  min-height: calc(100vh - 72px);
+  padding: 40px 24px 140px 24px;
+  background-color: var(--bg-app);
+  background-image: radial-gradient(circle at top center, rgba(138, 43, 226, 0.25) 0%, rgba(8, 6, 13, 0.88) 70%), url('../assets/arca_station_background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text-main);
+  transition: background-color var(--transition-normal);
+}
+
+[data-theme="light"] .player-page-layout {
+  background-image: radial-gradient(circle at top center, rgba(245, 243, 250, 0.92) 0%, rgba(245, 243, 250, 0.98) 100%), url('../assets/arca_station_background.jpg');
+}
+
+.player-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* --------------------------------------------------------------------------
+   2. HERO HEADER
+   -------------------------------------------------------------------------- */
+.player-hero-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--navbar-border);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.live-pill-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 45, 85, 0.12);
+  border: 1px solid rgba(255, 45, 85, 0.3);
+  color: var(--arca-live);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  width: fit-content;
+}
+
+.pulse-red {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--arca-live);
+  box-shadow: 0 0 10px var(--arca-live-glow);
+  animation: pulseLive 2s infinite ease-in-out;
+}
+
+.player-station-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  background: linear-gradient(135deg, var(--text-main) 40%, var(--arca-purple-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.player-show-title {
+  font-size: 1rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.player-show-title span {
+  color: var(--arca-purple-light);
+  font-style: italic;
+}
+
+.header-right-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.listeners-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--action-btn-bg);
+  border: 1px solid var(--action-btn-border);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+}
+
+.listeners-badge svg {
+  width: 16px;
+  height: 16px;
+  color: var(--arca-purple-light);
+}
+
+.genre-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--arca-purple-light);
+  background: rgba(138, 43, 226, 0.1);
+  border: 1px solid rgba(138, 43, 226, 0.25);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+}
+
+/* --------------------------------------------------------------------------
+   3. MODE SELECTOR BAR (AUDIO | VIDEO | LETRAS)
+   -------------------------------------------------------------------------- */
+.mode-selector-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.mode-capsule-switcher {
+  display: flex;
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  gap: 4px;
+  box-shadow: var(--navbar-shadow);
+  backdrop-filter: blur(16px);
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.mode-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mode-btn:hover {
+  color: var(--text-hover);
+}
+
+.mode-btn.active {
+  background: var(--arca-purple-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 16px var(--arca-purple-glow);
+}
+
+.station-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.station-picker label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.station-dropdown {
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
+  color: var(--text-main);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  outline: none;
+  cursor: pointer;
+  transition: border-color var(--transition-fast);
+}
+
+.station-dropdown:focus {
+  border-color: var(--arca-purple-primary);
+}
+
+/* --------------------------------------------------------------------------
+   4. STAGE VIEWPORT (AUDIO, VIDEO, LETRAS)
+   -------------------------------------------------------------------------- */
+.player-stage-viewport {
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
+  border-radius: 28px;
+  padding: 36px;
+  box-shadow: var(--navbar-shadow);
+  backdrop-filter: blur(20px);
+  min-height: 420px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stage-view {
+  display: none;
+}
+
+.stage-view.active {
+  display: block;
+}
+
+/* MODO 1: AUDIO STAGE */
+.audio-stage-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Ocultar fila de stats mobile en desktop */
+.mobile-stats-row {
+  display: none;
+}
+
+.audio-controls-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.album-art-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+}
+
+.art-glow-backdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 90%;
+  border-radius: 24px;
+  background: linear-gradient(135deg, var(--arca-purple-primary), #EC4899);
+  filter: blur(35px);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.album-art-card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  background: linear-gradient(145deg, #1C102B, #0A0612);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.album-art-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   ESTILO 2: ONDA DE SONIDO DIGITAL CONTINUA FLUID (CYBERPUNK NEÓN)
+   -------------------------------------------------------------------------- */
+.fluid-cyberwave-container {
+  position: relative;
+  width: 100%;
+  height: 120px;
+  padding: 16px 20px;
+  background: rgba(12, 9, 24, 0.75);
+  border-radius: 24px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  box-shadow: inset 0 0 25px rgba(138, 43, 226, 0.2), 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  backdrop-filter: blur(16px);
+}
+
+[data-theme="light"] .fluid-cyberwave-container {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(138, 43, 226, 0.22);
+  box-shadow: inset 0 0 20px rgba(138, 43, 226, 0.1), 0 6px 20px rgba(80, 40, 120, 0.08);
+}
+
+.cyberwave-ambient-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 60%;
+  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.25) 0%, rgba(56, 189, 248, 0.15) 50%, transparent 80%);
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+.aurora-wave-svg {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+}
+
+/* AURORA FLOW — CAPAS DE GRADIENTE EN MOVIMIENTO */
+.aurora-layer {
+  will-change: transform;
+}
+
+.aurora-layer-1 {
+  animation: auroraDriftA 14s infinite ease-in-out;
+}
+
+.aurora-layer-2 {
+  animation: auroraDriftB 18s infinite ease-in-out;
+}
+
+.aurora-layer-3 {
+  animation: auroraDriftC 11s infinite ease-in-out;
+}
+
+.aurora-wave-line {
+  animation: auroraLineFlow 10s infinite ease-in-out alternate;
+}
+
+@keyframes auroraDriftA {
+  0%   { transform: translate(-28px, 0) scale(1); }
+  50%  { transform: translate(28px, -14px) scale(1.02); }
+  100% { transform: translate(-28px, 0) scale(1); }
+}
+
+@keyframes auroraDriftB {
+  0%   { transform: translate(22px, 10px) scale(1.03); }
+  50%  { transform: translate(-22px, -10px) scale(1); }
+  100% { transform: translate(22px, 10px) scale(1.03); }
+}
+
+@keyframes auroraDriftC {
+  0%   { transform: translate(-14px, -8px); }
+  50%  { transform: translate(14px, 8px); }
+  100% { transform: translate(-14px, -8px); }
+}
+
+@keyframes auroraLineFlow {
+  0%   { d: path("M-40,100 C120,50 300,135 500,90 C740,55 880,130 1040,85"); }
+  50%  { d: path("M-40,100 C120,130 300,55 500,120 C740,90 880,70 1040,115"); }
+  100% { d: path("M-40,100 C120,50 300,135 500,90 C740,55 880,130 1040,85"); }
+}
+
+/* PAUSED STATE PARA LA AURORA FLOW */
+.fluid-cyberwave-container.paused .aurora-wave-svg {
+  animation-play-state: paused;
+}
+
+.fluid-cyberwave-container.paused .aurora-layer,
+.fluid-cyberwave-container.paused .aurora-wave-line {
+  animation-play-state: paused !important;
+  opacity: 0.25 !important;
+}
+
+/* PAUSED STATE PARA EL AURA DE FRECUENCIA Y ONDAS */
+.frequency-aura-container.paused .freq-bar {
+  animation-play-state: paused !important;
+  transform: scaleY(0.12) !important;
+  opacity: 0.25 !important;
+}
+
+.frequency-aura-container.paused .sine-path-1,
+.frequency-aura-container.paused .sine-path-2,
+.frequency-aura-container.paused .p-dot {
+  animation-play-state: paused !important;
+  opacity: 0.15 !important;
+}
+
+.icon-control-btn.active-fav {
+  color: var(--arca-live) !important;
+}
+
+.icon-control-btn.active-fav svg {
+  fill: var(--arca-live) !important;
+  transform: scale(1.15);
+}
+
+/* OVERLAY DE ESTADOS DE TRANSMISIÓN (SIN SEÑAL / CARGANDO / FINALIZADO) */
+.stream-status-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(8, 6, 13, 0.85);
+  backdrop-filter: blur(16px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+[data-theme="light"] .stream-status-overlay {
+  background: rgba(245, 243, 250, 0.88);
+}
+
+.status-modal-card {
+  background: var(--navbar-bg);
+  border: 1px solid var(--arca-purple-primary);
+  box-shadow: 0 16px 40px var(--arca-purple-glow);
+  padding: 32px 40px;
+  border-radius: 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 460px;
+  width: 100%;
+}
+
+.status-spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(168, 85, 247, 0.2);
+  border-top-color: var(--arca-purple-light);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
+}
+
+.status-signal-icon, .status-ended-icon {
+  font-size: 3rem;
+}
+
+.status-modal-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-main);
+}
+
+.status-modal-card p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.status-action-btn {
+  background: var(--arca-purple-primary);
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 14px var(--arca-purple-glow);
+  transition: transform var(--transition-fast);
+}
+
+.status-action-btn:hover {
+  transform: scale(1.05);
+}
+
+/* MODALES DE COMPARTIR Y TOAST ME GUSTA */
+.arca-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.arca-modal-card {
+  position: relative;
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
+  box-shadow: var(--navbar-shadow), 0 20px 50px rgba(0, 0, 0, 0.6);
+  border-radius: 28px;
+  padding: 32px;
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 16px;
+  backdrop-filter: blur(24px);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 1.6rem;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-main);
+}
+
+.modal-header-icon {
+  font-size: 2.5rem;
+}
+
+.share-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.share-opt-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--navbar-border);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-main);
+  transition: all var(--transition-fast);
+}
+
+.share-opt-btn:hover {
+  background: var(--arca-purple-primary);
+  color: #fff;
+  border-color: var(--arca-purple-primary);
+}
+
+.copy-link-box {
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.copy-link-box input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--navbar-border);
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
+
+.copy-link-box button {
+  background: var(--arca-purple-primary);
+  color: #fff;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+}
+
+.copy-success-msg {
+  font-size: 0.78rem;
+  color: #10B981;
+  font-weight: 700;
+}
+
+/* TOAST FAVORITO */
+.favorite-toast {
+  position: fixed;
+  bottom: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(18, 14, 28, 0.95);
+  border: 1px solid var(--arca-live);
+  box-shadow: 0 8px 24px var(--arca-live-glow);
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 3000;
+  animation: toastIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes toastIn {
+  from { transform: translate(-50%, 20px); opacity: 0; }
+  to { transform: translate(-50%, 0); opacity: 1; }
+}
+.progress-timeline-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.time-stamp {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  min-width: 45px;
+}
+
+.time-stamp.live-label {
+  color: var(--arca-live);
+}
+
+.progress-bar-track {
+  flex: 1;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  position: relative;
+  cursor: pointer;
+}
+
+[data-theme="light"] .progress-bar-track {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--arca-purple-primary), var(--arca-purple-light));
+  border-radius: var(--radius-pill);
+}
+
+.progress-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 0 10px var(--arca-purple-primary);
+}
+
+/* TRANSPORT BUTTONS */
+.transport-buttons-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+}
+
+.icon-control-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.icon-control-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.icon-control-btn:hover {
+  color: var(--text-main);
+  background: var(--action-btn-hover);
+}
+
+.main-play-pause-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--arca-purple-primary), var(--arca-purple-light));
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px var(--arca-purple-glow);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.main-play-pause-btn svg {
+  width: 26px;
+  height: 26px;
+}
+
+.main-play-pause-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 12px 30px var(--arca-purple-glow);
+}
+
+.main-play-pause-btn:active {
+  transform: scale(0.96);
+}
+
+.volume-slider-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 240px;
+  margin: 0 auto;
+}
+
+.vol-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+}
+
+.volume-track {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-pill);
+  position: relative;
+  cursor: pointer;
+}
+
+[data-theme="light"] .volume-track {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.volume-fill {
+  height: 100%;
+  background: var(--arca-purple-light);
+  border-radius: var(--radius-pill);
+}
+
+
+/* MODO 2: VIDEO STAGE */
+.video-player-wrapper {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #000;
+}
+
+.video-canvas-mock {
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, #1E1233 0%, #05030A 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.video-ambient-stream {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.video-waveform-bg {
+  width: 300px;
+  height: 100px;
+  color: var(--arca-purple-light);
+  filter: drop-shadow(0 0 15px var(--arca-purple-glow));
+}
+
+.video-host-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.video-overlay-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.live-dot-red {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--arca-live);
+  box-shadow: 0 0 8px var(--arca-live-glow);
+}
+
+.video-overlay-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 16px 24px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.v-control-btn {
+  color: #fff;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.v-control-btn:hover {
+  opacity: 1;
+}
+
+.v-control-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.v-meta {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.5px;
+}
+
+
+/* MODO 3: LYRICS STAGE */
+.lyrics-view-container {
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lyrics-header h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--arca-purple-light);
+}
+
+.lyrics-header p {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.lyrics-scroll-box {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 20px 0;
+}
+
+.lyric-line {
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+}
+
+.lyric-line.past {
+  opacity: 0.35;
+  filter: blur(0.5px);
+}
+
+.lyric-line.active {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--arca-purple-light);
+  text-shadow: 0 0 16px var(--arca-purple-glow);
+  transform: scale(1.04);
+}
+
+.lyric-line.future {
+  opacity: 0.55;
+}
+
+
+/* --------------------------------------------------------------------------
+   5. DETALLES Y PROGRAMACIÓN GRID
+   -------------------------------------------------------------------------- */
+.player-info-schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+}
+
+.info-card-panel, .schedule-card-panel {
+  background: var(--navbar-bg);
+  border: 1px solid var(--navbar-border);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--navbar-shadow);
+  backdrop-filter: blur(16px);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.panel-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text-main);
+
+}
+
+.panel-section-title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--arca-purple-light);
+}
+
+.info-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--navbar-border);
+  font-size: 0.88rem;
+}
+
+.info-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.info-val {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.info-val.highlight-purple {
+  color: var(--arca-purple-light);
+}
+
+/* SCHEDULE TIMELINE */
+.schedule-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.schedule-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--navbar-border);
+}
+
+[data-theme="light"] .schedule-item {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.schedule-item.active-now {
+  background: rgba(138, 43, 226, 0.1);
+  border-color: rgba(138, 43, 226, 0.3);
+}
+
+.schedule-badge-now {
+  font-size: 0.65rem;
+  font-weight: 800;
+  background: var(--arca-purple-primary);
+  color: #fff;
+  padding: 4px 8px;
+  border-radius: var(--radius-pill);
+}
+
+.schedule-time {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--arca-purple-light);
+  min-width: 65px;
+}
+
+.schedule-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.schedule-info strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.schedule-info small {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+
+/* --------------------------------------------------------------------------
+   6. MINI PLAYER FLOTANTE (STICKY INFERIOR)
+   -------------------------------------------------------------------------- */
+.arca-mini-player {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 850;
+  width: calc(100% - 48px);
+  max-width: 900px;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--navbar-border);
+  border-radius: 28px;
+  box-shadow: var(--navbar-shadow), 0 12px 35px rgba(0, 0, 0, 0.5);
+  padding: 10px 20px;
+  transition: all var(--transition-normal);
+}
+
+.mini-player-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.mini-track-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-art {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--arca-purple-primary), var(--arca-purple-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.mini-art svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mini-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.mini-text strong {
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+.mini-text span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.mini-waveform {
+  display: flex;
+  align-items: center;
+  width: 80px;
+  height: 24px;
+  position: relative;
+}
+
+.mini-cyber-wave {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 6px rgba(168, 85, 247, 0.6));
+}
+
+.mini-wave-line {
+  animation: miniWaveMotion 1.8s infinite ease-in-out alternate;
+}
+
+@keyframes miniWaveMotion {
+  0% { d: path("M0,12 Q12.5,2 25,12 T50,12 T75,12 T100,12"); }
+  50% { d: path("M0,12 Q12.5,20 25,12 T50,4 T75,20 T100,12"); }
+  100% { d: path("M0,12 Q12.5,4 25,12 T50,22 T75,3 T100,12"); }
+}
+
+.mini-waveform.paused .mini-wave-line {
+  animation-play-state: paused !important;
+  opacity: 0.25 !important;
+}
+
+.mini-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mini-btn {
+  color: var(--text-muted);
+  transition: color var(--transition-fast);
+}
+
+.mini-btn:hover {
+  color: var(--text-main);
+}
+
+.mini-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mini-btn-play {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--arca-purple-primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 10px var(--arca-purple-glow);
+}
+
+.mini-btn-play svg {
+  width: 16px;
+  height: 16px;
+}
+
+.mini-btn-expand {
+  color: var(--arca-purple-light);
+  transition: transform var(--transition-fast);
+}
+
+.mini-btn-expand:hover {
+  transform: translateY(-2px);
+}
+
+.mini-btn-expand svg {
+  width: 20px;
+  height: 20px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* --------------------------------------------------------------------------
+   6B. ARCA MOBILE HEADER (375px / Android)
+   -------------------------------------------------------------------------- */
+.arca-mobile-header {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 56px;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--navbar-border);
+  z-index: 900;
+  padding: 0 16px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mobile-back-btn,
+.mobile-search-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--navbar-border);
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition-fast);
+}
+
+.mobile-back-btn:hover,
+.mobile-search-btn:hover {
+  background: var(--action-btn-hover);
+}
+
+.mobile-back-btn svg,
+.mobile-search-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-station-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.2px;
+}
+
+/* --------------------------------------------------------------------------
+   6C. ARCA MOBILE BOTTOM NAV (375px / Android)
+   -------------------------------------------------------------------------- */
+.arca-mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 64px;
+  background: var(--navbar-bg);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-top: 1px solid var(--navbar-border);
+  z-index: 900;
+  padding: 0 8px;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.bottom-nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 6px 12px;
+  border-radius: 12px;
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.bottom-nav-item svg {
+  width: 20px;
+  height: 20px;
+}
+
+.bottom-nav-item:hover {
+  color: var(--text-main);
+  background: var(--action-btn-hover);
+}
+
+.bottom-nav-item.active {
+  color: var(--arca-purple-light);
+}
+
+.bottom-nav-item.active svg {
+  filter: drop-shadow(0 0 6px var(--arca-purple-glow));
+}
+
+.bottom-nav-live-dot {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--arca-live);
+  box-shadow: 0 0 6px var(--arca-live-glow);
+}
+
+/* --------------------------------------------------------------------------
+   7. RESPONSIVE BREAKPOINTS PARA EL PLAYER
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .audio-stage-grid {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .album-art-container {
+    width: 240px;
+    height: 240px;
+  }
+
+  .player-info-schedule-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .player-page-layout {
+    padding-top: 20px;
+    padding-bottom: 140px;
+  }
+
+  .player-hero-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .mode-selector-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mode-capsule-switcher {
+    justify-content: space-around;
+  }
+
+  .mode-btn {
+    padding: 8px 12px;
+    font-size: 0.78rem;
+  }
+
+  .player-stage-viewport {
+    padding: 20px;
+    min-height: auto;
+  }
+
+  .video-player-wrapper {
+    height: 260px;
+  }
+
+  .arca-mini-player {
+    width: calc(100% - 24px);
+    bottom: 12px;
+    padding: 8px 14px;
+  }
+
+  .mini-waveform {
+    display: none; /* Ocultar waveform secundario en mobile pequeño */
+  }
+}
+
+/* --------------------------------------------------------------------------
+   8. MOBILE — FULL APP-NATIVE EXPERIENCE (≤ 480px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+
+  /* ── BASE RESET ─────────────────────────────────────────── */
+  html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* ── OCULTAR ELEMENTOS DE ESCRITORIO ────────────────────── */
+  .arca-navbar-desktop   { display: none !important; }
+  .arca-footer-component { display: none !important; }
+  .arca-mini-player      { display: none !important; }
+  .station-picker        { display: none !important; }
+  .header-right-meta     { display: none !important; }
+  .player-info-schedule-grid { display: none !important; }
+
+  /* ── MOSTRAR ELEMENTOS MÓVILES ──────────────────────────── */
+  .arca-mobile-header     { display: flex; }
+  .arca-mobile-bottom-nav { display: flex; }
+
+  /* ── PÁGINA PRINCIPAL ───────────────────────────────────── */
+  .player-page-layout {
+    min-height: 100dvh;
+    padding: 68px 14px 80px !important;
+    background-attachment: scroll !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+  }
+
+  .player-container {
+    gap: 14px !important;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* ── HERO HEADER (badge + título + subtítulo centrado) ───── */
+  .player-hero-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 5px !important;
+    padding-bottom: 6px !important;
+    border-bottom: none !important;
+  }
+
+  .header-left {
+    align-items: center !important;
+    gap: 4px !important;
+    width: 100% !important;
+  }
+
+  .live-pill-badge {
+    font-size: 0.6rem !important;
+    padding: 4px 12px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .player-station-title {
+    font-size: 1.55rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.3px !important;
+    word-break: break-word !important;
+  }
+
+  .player-show-title {
+    font-size: 0.8rem !important;
+    word-break: break-word !important;
+  }
+
+  /* ── MODE SWITCHER BARRA ────────────────────────────────── */
+  .mode-selector-bar {
+    gap: 0 !important;
+  }
+
+  .mode-capsule-switcher {
+    width: 100% !important;
+    justify-content: space-around !important;
+    padding: 4px !important;
+    gap: 4px !important;
+  }
+
+  .mode-btn {
+    flex: 1 !important;
+    padding: 8px 4px !important;
+    font-size: 0.7rem !important;
+    gap: 5px !important;
+    justify-content: center !important;
+  }
+
+  .mode-btn svg {
+    width: 14px !important;
+    height: 14px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* ── STAGE VIEWPORT (card grande) ───────────────────────── */
+  .player-stage-viewport {
+    padding: 20px 16px !important;
+    border-radius: 24px !important;
+    min-height: auto !important;
+    overflow: hidden !important;
+  }
+
+  /* ── AUDIO STAGE: layout en columna tipo app ─────────────── */
+  .audio-stage-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    justify-items: center !important;
+    text-align: center !important;
+  }
+
+  /* Cover art grande y cuadrado */
+  .album-art-container {
+    width: min(220px, 72vw) !important;
+    height: min(220px, 72vw) !important;
+  }
+
+  .album-art-card {
+    border-radius: 20px !important;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.55) !important;
+  }
+
+  .art-glow-backdrop {
+    border-radius: 20px !important;
+    filter: blur(28px) !important;
+    opacity: 0.5 !important;
+  }
+
+  /* Badge LIVE encima de la imagen */
+  .art-live-indicator {
+    font-size: 0.6rem !important;
+    padding: 3px 9px !important;
+    bottom: 8px !important;
+    right: 8px !important;
+  }
+
+  /* ── Panel de controles (debajo del cover) ──────────────── */
+  .audio-controls-panel {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    align-items: center !important;
+  }
+
+  /* Nombre de canción y artista */
+  .track-meta {
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .track-meta h2 {
+    font-size: 1.05rem !important;
+    font-weight: 800 !important;
+    line-height: 1.2 !important;
+    word-break: break-word !important;
+  }
+
+  .track-meta p {
+    font-size: 0.8rem !important;
+    margin-top: 2px !important;
+  }
+
+  /* Visualizador de onda más compacto */
+  .fluid-cyberwave-container {
+    width: 100% !important;
+    height: 64px !important;
+    border-radius: 14px !important;
+    padding: 10px 14px !important;
+  }
+
+  /* ── Barra de Progreso ───────────────────────────────────── */
+  .progress-timeline-wrapper {
+    width: 100% !important;
+    gap: 8px !important;
+  }
+
+  .time-stamp {
+    font-size: 0.65rem !important;
+    min-width: 36px !important;
+  }
+
+  .progress-bar-track {
+    height: 4px !important;
+  }
+
+  .progress-thumb {
+    width: 12px !important;
+    height: 12px !important;
+  }
+
+  /* ── Controles de Transporte ─────────────────────────────── */
+  .transport-buttons-row {
+    gap: 16px !important;
+    justify-content: center !important;
+    width: 100% !important;
+  }
+
+  .icon-control-btn {
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .icon-control-btn svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  .main-play-pause-btn {
+    width: 58px !important;
+    height: 58px !important;
+    box-shadow: 0 6px 20px var(--arca-purple-glow) !important;
+  }
+
+  .main-play-pause-btn svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+
+  .volume-slider-group {
+    display: none !important;
+  }
+
+  /* ── Meta-info inferior (oyentes · género · LIVE) ─────────── */
+  /* Añadir una fila de stats dentro de la card, visible en móvil */
+  .mobile-stats-row {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    padding: 10px 14px 0 !important;
+    border-top: 1px solid var(--navbar-border) !important;
+    margin-top: 4px !important;
+    gap: 8px !important;
+  }
+
+  .mobile-stat-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    font-size: 0.72rem !important;
+    font-weight: 600 !important;
+    color: var(--text-muted) !important;
+  }
+
+  .mobile-stat-item svg {
+    width: 13px !important;
+    height: 13px !important;
+    color: var(--arca-purple-light) !important;
+  }
+
+  .mobile-live-badge {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    font-size: 0.65rem !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    background: var(--arca-live) !important;
+    padding: 3px 10px !important;
+    border-radius: var(--radius-pill) !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 0 10px var(--arca-live-glow) !important;
+  }
+
+  .mobile-genre-tag {
+    font-size: 0.65rem !important;
+    font-weight: 700 !important;
+    color: var(--arca-purple-light) !important;
+    letter-spacing: 0.5px !important;
+    text-align: center !important;
+  }
+
+  /* ── VIDEO STAGE ─────────────────────────────────────────── */
+  .video-player-wrapper {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9 !important;
+    border-radius: 14px !important;
+  }
+
+  /* ── LYRICS STAGE ────────────────────────────────────────── */
+  .lyrics-view-container {
+    width: 100% !important;
+  }
+
+  .lyrics-scroll-box {
+    max-height: 220px !important;
+    overflow-y: auto !important;
+  }
+
+  .lyric-line {
+    font-size: 1rem !important;
+  }
+
+  .lyric-line.active {
+    font-size: 1.2rem !important;
+  }
+
+  /* ── BOTTOM NAV ──────────────────────────────────────────── */
+  .arca-mobile-bottom-nav {
+    width: 100% !important;
+    height: 60px !important;
+    padding-bottom: env(safe-area-inset-bottom, 4px) !important;
+  }
+
+  .bottom-nav-item {
+    font-size: 0.58rem !important;
+    padding: 4px 10px !important;
+  }
+
+  /* ── MODALES ─────────────────────────────────────────────── */
+  .arca-modal-backdrop {
+    padding: 16px !important;
+  }
+
+  .arca-modal-card {
+    padding: 24px 20px !important;
+    border-radius: 22px !important;
+  }
+
+  .share-options-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .copy-link-box {
+    flex-direction: column !important;
+  }
+
+  /* ── MOBILE HEADER refinado ──────────────────────────────── */
+  .arca-mobile-header {
+    height: 52px !important;
+    padding: 0 14px !important;
+  }
+
+  .mobile-station-name {
+    font-size: 0.95rem !important;
+  }
+}

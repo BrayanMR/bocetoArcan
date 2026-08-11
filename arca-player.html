@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARCA PLAYER — Plataforma Profesional de Radio Streaming</title>
+  <meta name="description" content="El corazón multimedia de ARCA Radio Streaming: reproductor interactivo con modos Audio, Video en vivo y Letras sincronizadas.">
+  
+  <!-- Fonts (Manrope) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Estilos base del sistema ARCA y del Player -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/arca-player.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       1. ARCA DESKTOP NAVBAR (Consistencia con el sistema existente)
+       ========================================================================== -->
+  <header class="arca-navbar-desktop" id="arca-desktop-navbar" role="banner">
+    <div class="arca-navbar-container">
+      
+      <!-- Logo ARCA -->
+      <div class="arca-logo-component">
+        <a href="index.html" class="arca-logo-link" aria-label="ARCA Radio Streaming - Ir a inicio">
+          <div class="logo-icon-wrapper">
+            <svg class="arca-logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="logo-brand-details">
+            <span class="logo-title">ARCA</span>
+            <span class="logo-subtitle">RADIO STREAMING</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Navegación Central -->
+      <nav class="arca-desktop-nav" aria-label="Navegación principal">
+        <div class="lamp-spotlight-desktop" id="lamp-desktop" aria-hidden="true">
+          <div class="lamp-top-bar"></div>
+          <div class="lamp-light-cone"></div>
+          <div class="lamp-glow-point"></div>
+        </div>
+
+        <ul class="arca-nav-list" id="desktop-nav-list">
+          <li>
+            <a href="index.html" class="arca-nav-link" data-nav="inicio">
+              <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span>Inicio</span>
+            </a>
+          </li>
+          <li>
+            <button class="arca-nav-link active" data-nav="live">
+              <span class="live-dot-indicator"></span>
+              <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9c3.9 3.9 3.9 10.3 0 14.2"/></svg>
+              <span>En vivo</span>
+            </button>
+          </li>
+          <li>
+            <button class="arca-nav-link" data-nav="stations">
+              <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M6 16h12"/><path d="M12 2v5"/></svg>
+              <span>Estaciones</span>
+            </button>
+          </li>
+          <li>
+            <button class="arca-nav-link" data-nav="programs">
+              <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              <span>Programas</span>
+            </button>
+          </li>
+          <li>
+            <button class="arca-nav-link" data-nav="podcasts">
+              <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              <span>Podcasts</span>
+            </button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- Acciones de Utilidad -->
+      <div class="arca-utility-actions">
+        <button class="arca-action-btn" title="Buscar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <button class="arca-action-btn" title="Favoritos">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </button>
+        <button class="arca-action-btn theme-toggle-nav-btn" id="btn-player-theme-toggle" title="Alternar Modo Oscuro/Claro">
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <div class="arca-profile-menu">
+          <button class="arca-profile-btn">
+            <div class="avatar-ring">
+              <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <span class="status-indicator-dot"></span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ==========================================================================
+       1B. ARCA MOBILE HEADER (375px / Android)
+       ========================================================================== -->
+  <header class="arca-mobile-header" id="arca-mobile-header" role="banner">
+    <button class="mobile-back-btn" id="mobile-back-btn" aria-label="Volver">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <h1 class="mobile-station-name" id="mobile-station-name">ARCA 96.5 FM</h1>
+    <button class="mobile-search-btn" aria-label="Buscar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+  </header>
+
+  <!-- ==========================================================================
+       2. CONTENIDO PRINCIPAL — EXPERIENCIA ARCA PLAYER
+       ========================================================================== -->
+  <main class="player-page-layout">
+    <div class="player-container">
+      
+      <!-- HERO HEADER DEL PLAYER -->
+      <section class="player-hero-header">
+        <div class="header-left">
+          <div class="live-pill-badge">
+            <span class="pulse-red"></span>
+            <span>TRANSMISIÓN EN VIVO HD</span>
+          </div>
+          <h1 class="player-station-title" id="station-title">ARCA 96.5 FM</h1>
+          <p class="player-show-title" id="show-title">La Noche en ARCA — <span>"El sonido que te acompaña"</span></p>
+        </div>
+        
+        <div class="header-right-meta">
+          <div class="listeners-badge">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span id="listeners-count">1.250</span> oyentes
+          </div>
+          <div class="genre-tag" id="station-genre">POP / ELECTRONIC / LIVE</div>
+        </div>
+      </section>
+
+      <!-- BARRA DE SELECTOR DE MODO ( AUDIO | 🎥 VIDEO | 📝 LETRAS) -->
+      <section class="mode-selector-bar">
+        <div class="mode-capsule-switcher">
+          <button class="mode-btn active" data-mode="audio" id="mode-audio-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            <span>AUDIO</span>
+          </button>
+          
+          <button class="mode-btn" data-mode="video" id="mode-video-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            <span>VIDEO EN VIVO</span>
+          </button>
+          
+          <button class="mode-btn" data-mode="lyrics" id="mode-lyrics-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            <span>LETRAS</span>
+          </button>
+        </div>
+
+        <!-- SELECTOR DE EMISORA RAPIDA -->
+        <div class="station-picker">
+          <label for="station-select-dropdown">Cambiar Emisora:</label>
+          <select id="station-select-dropdown" class="station-dropdown">
+            <option value="arca-965">ARCA 96.5 FM — Pop & Electronics</option>
+            <option value="arca-chill">ARCA Chill — Lo-Fi Ambient</option>
+            <option value="arca-worship">ARCA Worship — Fe & Esperanza</option>
+            <option value="arca-news">ARCA News — Noticias 24/7</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- DISPLAY DEL REPRODUCTOR (ZONA PRINCIPAL MULTIMEDIA) -->
+      <section class="player-stage-viewport">
+        
+        <!-- OVERLAY DE ESTADOS DE TRANSMISIÓN (SIN SEÑAL / CARGANDO / FINALIZADO) -->
+        <div class="stream-status-overlay hidden" id="stream-status-overlay">
+          <div class="status-modal-card">
+            <div class="status-spinner hidden" id="status-spinner"></div>
+            <div class="status-signal-icon hidden" id="status-signal-icon">📡</div>
+            <div class="status-ended-icon hidden" id="status-ended-icon">🏁</div>
+            
+            <h3 id="status-overlay-title">Conectando con la Señal HD...</h3>
+            <p id="status-overlay-desc">Estableciendo flujo de audio y video de alta fidelidad.</p>
+            
+            <button class="status-action-btn hidden" id="status-retry-btn">Reintentar Conexión</button>
+          </div>
+        </div>
+
+        <!-- MODO 1: AUDIO STAGE (Default) -->
+        <div class="stage-view audio-stage active" id="stage-audio">
+          <div class="audio-stage-grid">
+            
+            <!-- Carátula HD de la Estación con Imagen Real -->
+            <div class="album-art-container">
+              <div class="art-glow-backdrop"></div>
+              <div class="album-art-card">
+                <img src="assets/arca_station_cover.jpg" alt="Carátula ARCA 96.5 FM" class="album-art-img" id="station-cover-img">
+                <div class="art-live-indicator" id="art-live-badge">LIVE HD</div>
+              </div>
+            </div>
+
+            <!-- Panel de Controles y Visualizador Audio con AURA DE FRECUENCIA -->
+            <div class="audio-controls-panel">
+              <div class="track-meta">
+                <h2 id="current-track-name">Sintiendo el Ritmo de la Noche</h2>
+                <p id="current-artist-name">ARCA Live Sessions ft. DJ Electro</p>
+              </div>
+
+              <!-- VISUALIZADOR 2026: AURORA FLOW (GRADIENTES SUAVES QUE FLUYEN) -->
+              <div class="fluid-cyberwave-container" id="waveform-visualizer">
+                <div class="cyberwave-ambient-glow"></div>
+
+                <svg class="aurora-wave-svg" viewBox="0 0 1000 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="auroraLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#8A2BE2" />
+                      <stop offset="30%" stop-color="#C084FC" />
+                      <stop offset="60%" stop-color="#38BDF8" />
+                      <stop offset="85%" stop-color="#D946EF" />
+                      <stop offset="100%" stop-color="#8A2BE2" />
+                    </linearGradient>
+
+                    <linearGradient id="auroraFillA" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.55"/>
+                      <stop offset="45%" stop-color="#A855F7" stop-opacity="0.30"/>
+                      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.10"/>
+                    </linearGradient>
+
+                    <linearGradient id="auroraFillB" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.40"/>
+                      <stop offset="50%" stop-color="#D946EF" stop-opacity="0.25"/>
+                      <stop offset="100%" stop-color="#8A2BE2" stop-opacity="0.05"/>
+                    </linearGradient>
+
+                    <linearGradient id="auroraFillC" x1="0%" y1="50%" x2="100%" y2="50%">
+                      <stop offset="0%" stop-color="#E879F9" stop-opacity="0.35"/>
+                      <stop offset="50%" stop-color="#A78BFA" stop-opacity="0.20"/>
+                      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0.08"/>
+                    </linearGradient>
+
+                    <filter id="auroraBlur" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="18" />
+                    </filter>
+                    <filter id="auroraLineGlow" x="-30%" y="-30%" width="160%" height="160%">
+                      <feGaussianBlur stdDeviation="4" result="glow"/>
+                      <feMerge>
+                        <feMergeNode in="glow"/>
+                        <feMergeNode in="SourceGraphic"/>
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <!-- Capa de fondo lavanda -->
+                  <path class="aurora-layer aurora-layer-1" filter="url(#auroraBlur)" fill="url(#auroraFillA)"
+                        d="M-120,170 C80,60 260,220 460,120 C680,20 840,190 1120,90 L1120,200 L-120,200 Z"/>
+
+                  <!-- Capa intermedia cian/fucsia -->
+                  <path class="aurora-layer aurora-layer-2" filter="url(#auroraBlur)" fill="url(#auroraFillB)"
+                        d="M-120,60 C120,180 340,40 540,120 C740,180 920,60 1120,150 L1120,200 L-120,200 Z"/>
+
+                  <!-- Banda fina superior flotante -->
+                  <path class="aurora-layer aurora-layer-3" filter="url(#auroraBlur)" fill="url(#auroraFillC)"
+                        d="M-120,110 C180,200 420,30 660,130 C840,200 960,90 1120,110 L1120,200 L-120,200 Z"/>
+
+                  <!-- Línea principal fina con gradiente y brillo -->
+                  <path class="aurora-wave-line" filter="url(#auroraLineGlow)"
+                        d="M-40,100 C120,50 300,135 500,90 C740,55 880,130 1040,85"
+                        fill="none" stroke="url(#auroraLineGrad)" stroke-width="2.5" stroke-linecap="round"/>
+                </svg>
+              </div>
+
+              <!-- Barra de Progreso de Tiempo -->
+              <div class="progress-timeline-wrapper">
+                <span class="time-stamp" id="current-time-text">14:22</span>
+                <div class="progress-bar-track" id="progress-bar-click">
+                  <div class="progress-fill" id="progress-fill-bar" style="width: 65%;"></div>
+                  <div class="progress-thumb" id="progress-thumb" style="left: 65%;"></div>
+                </div>
+                <span class="time-stamp live-label" id="live-time-label">EN VIVO</span>
+              </div>
+
+              <!-- Botones Principales de Transporte -->
+              <div class="transport-buttons-row">
+                <button class="icon-control-btn" id="btn-fav-track" title="Marcar como favorito">
+                  <svg class="heart-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                </button>
+
+                <button class="icon-control-btn" id="btn-prev-track" title="Estación Anterior">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+                </button>
+
+                <button class="main-play-pause-btn" id="btn-main-play" title="Reproducir / Pausar">
+                  <svg class="icon-play hidden" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  <svg class="icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+                </button>
+
+                <button class="icon-control-btn" id="btn-next-track" title="Siguiente Estación">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+                </button>
+
+                <button class="icon-control-btn" id="btn-share-track" title="Compartir emisión">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                </button>
+              </div>
+
+              <!-- Control de Volumen con Click / Mute -->
+              <div class="volume-slider-group">
+                <button class="vol-btn" id="btn-volume-toggle" title="Silenciar / Activar sonido">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="vol-icon" id="vol-icon-svg"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                </button>
+                <div class="volume-track" id="volume-bar-click">
+                  <div class="volume-fill" id="volume-fill" style="width: 80%;"></div>
+                </div>
+              </div>
+
+              <!-- META INFO ROW (Solo visible en móvil) -->
+              <div class="mobile-stats-row">
+                <div class="mobile-stat-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <span><strong id="mobile-listeners-count">1.250</strong> oyentes</span>
+                </div>
+                <span class="mobile-genre-tag" id="mobile-station-genre">Pop · Electrónica</span>
+                <span class="mobile-live-badge">
+                  <span class="pulse-red" style="width:6px;height:6px;"></span>
+                  LIVE
+                </span>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO 2: VIDEO STAGE (Streaming de cámara en vivo de cabina) -->
+        <div class="stage-view video-stage" id="stage-video">
+          <div class="video-player-wrapper">
+            <div class="video-overlay-badge" id="video-live-badge">
+              <span class="live-dot-red"></span>
+              <span>ESTUDIO EN VIVO — CABINA ARCA 96.5</span>
+            </div>
+            
+            <!-- Video Mock Canvas -->
+            <div class="video-canvas-mock" id="video-canvas-element">
+              <div class="video-ambient-stream">
+                <svg class="video-waveform-bg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 12h3l3-9 4 18 4-12 3 6h3"/></svg>
+                <div class="video-host-badge">
+                  <span class="host-avatar">🎙️</span>
+                  <span>EN CABINA: DJ MATÍAS & VALENTINA</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Controles de Video sobrepuestos -->
+            <div class="video-overlay-controls">
+              <button class="v-control-btn" id="v-play-btn" title="Play/Pause Video">
+                <svg class="v-icon-play hidden" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                <svg class="v-icon-pause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+              </button>
+              <div class="v-meta" id="v-quality-indicator">ARCA STREAMING HD 1080p60</div>
+              <button class="v-control-btn" id="v-fullscreen-btn" title="Pantalla Completa">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODO 3: LETRAS / LYRICS STAGE (Karaoke / Synced Lyrics) -->
+        <div class="stage-view lyrics-stage" id="stage-lyrics">
+          <div class="lyrics-view-container">
+            <header class="lyrics-header">
+              <h3>LETRAS EN TIEMPO REAL</h3>
+              <p>Sincronizado dinámicamente con la emisión de ARCA 96.5 FM</p>
+            </header>
+
+            <div class="lyrics-scroll-box" id="lyrics-scroll-content">
+              <p class="lyric-line past">La noche comienza a envolver la ciudad...</p>
+              <p class="lyric-line past">Luces que brillan en la distancia,</p>
+              <p class="lyric-line past">y una frecuencia que nunca se apaga.</p>
+              <p class="lyric-line active" id="active-lyric-line">✦ DÉJATE LLEVAR POR EL SONIDO DE ARCA ✦</p>
+              <p class="lyric-line future">Siente la vibración en cada nota,</p>
+              <p class="lyric-line future">donde la música y la fe se encuentran.</p>
+              <p class="lyric-line future">Conectados en una sola voz, 24 horas al día.</p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- SECCIÓN INFERIOR EN DOS COLUMNAS: DETALLES DE LA EMISORA & PROGRAMACIÓN -->
+      <section class="player-info-schedule-grid">
+        
+        <!-- COLUMNA IZQUIERDA: INFORMACIÓN COMPLETA DE LA ESTACIÓN -->
+        <article class="info-card-panel">
+          <h3 class="panel-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>INFORMACIÓN DE LA EMISIÓN</span>
+          </h3>
+
+          <div class="info-details-list">
+            <div class="info-row">
+              <span class="info-label">Estación:</span>
+              <span class="info-val">ARCA 96.5 FM (Frecuencia Principal)</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Programa Actual:</span>
+              <span class="info-val">La Noche en ARCA</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Locutores:</span>
+              <span class="info-val">Carlos Mendoza & Sofía Ríos</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Calidad Audio:</span>
+              <span class="info-val highlight-purple">AAC+ 320 kbps High Definition</span>
+            </div>
+            <div class="info-row">
+              <span class="info-label">Ubicación Cabina:</span>
+              <span class="info-val">Estudios ARCA Media Center</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- COLUMNA DERECHA: PROGRAMACIÓN EN EMISIÓN (SCHEDULE) -->
+        <article class="schedule-card-panel">
+          <h3 class="panel-section-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            <span>PROGRAMACIÓN DE HOY</span>
+          </h3>
+
+          <div class="schedule-timeline">
+            
+            <!-- Item Ahora -->
+            <div class="schedule-item active-now">
+              <div class="schedule-badge-now">AHORA EN VIVO</div>
+              <div class="schedule-info">
+                <strong>La Noche en ARCA</strong>
+                <small>20:00 - 00:00 • Con Carlos Mendoza</small>
+              </div>
+            </div>
+
+            <!-- Item Después -->
+            <div class="schedule-item">
+              <div class="schedule-time">00:00 AM</div>
+              <div class="schedule-info">
+                <strong>ARCA Chill & Ambient</strong>
+                <small>00:00 - 06:00 • Selección sin interrupciones</small>
+              </div>
+            </div>
+
+            <!-- Item Más Tarde -->
+            <div class="schedule-item">
+              <div class="schedule-time">06:00 AM</div>
+              <div class="schedule-info">
+                <strong>Morning Vibes ARCA</strong>
+                <small>06:00 - 10:00 • Con Sofía Ríos</small>
+              </div>
+            </div>
+
+          </div>
+        </article>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       3. MINI PLAYER FLOTANTE INFERIOR (STICKY BOTTOM MINI PLAYER)
+       ========================================================================== -->
+  <aside class="arca-mini-player" id="arca-mini-player" aria-label="Reproductor flotante sutil">
+    <div class="mini-player-container">
+      
+      <!-- Portada + Título -->
+      <div class="mini-track-info">
+        <div class="mini-art">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13"/></svg>
+        </div>
+        <div class="mini-text">
+          <strong id="mini-title">ARCA 96.5 FM</strong>
+          <span id="mini-subtitle">La Noche en ARCA</span>
+        </div>
+      </div>
+
+      <!-- Waveform compacto (Onda Fluida Neón Continua) -->
+      <div class="mini-waveform" id="mini-waveform-container">
+        <svg class="mini-cyber-wave" viewBox="0 0 100 24" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="miniCyberGradientPrimary" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#8A2BE2" />
+              <stop offset="30%" stop-color="#C084FC" />
+              <stop offset="60%" stop-color="#38BDF8" />
+              <stop offset="85%" stop-color="#D946EF" />
+              <stop offset="100%" stop-color="#8A2BE2" />
+            </linearGradient>
+          </defs>
+          <path class="mini-wave-line" d="M0,12 Q12.5,2 25,12 T50,12 T75,12 T100,12" fill="none" stroke="url(#miniCyberGradientPrimary)" stroke-width="2.5" stroke-linecap="round" />
+        </svg>
+      </div>
+
+      <!-- Controles de Transporte Compactos -->
+      <div class="mini-controls">
+        <button class="mini-btn" id="mini-btn-prev" title="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+        </button>
+
+        <button class="mini-btn-play" id="mini-btn-play" title="Play/Pausa">
+          <svg class="mini-icon-play" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <svg class="mini-icon-pause hidden" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+        </button>
+
+        <button class="mini-btn" id="mini-btn-next" title="Siguiente">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+        </button>
+      </div>
+
+      <!-- Scroll up / Expand -->
+      <button class="mini-btn-expand" id="mini-btn-expand" title="Ir al Reproductor Principal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="18 15 12 9 6 15"/></svg>
+      </button>
+
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       3B. MOBILE BOTTOM NAV (375px / Android)
+       ========================================================================== -->
+  <nav class="arca-mobile-bottom-nav" id="arca-mobile-bottom-nav" aria-label="Navegación inferior">
+    <button class="bottom-nav-item" data-nav="inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Inicio</span>
+    </button>
+    <button class="bottom-nav-item active" data-nav="live">
+      <span class="bottom-nav-live-dot"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9c3.9 3.9 3.9 10.3 0 14.2"/></svg>
+      <span>EnVivo</span>
+    </button>
+    <button class="bottom-nav-item" data-nav="stations">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M12 2v5"/></svg>
+      <span>Estac.</span>
+    </button>
+    <button class="bottom-nav-item" data-nav="favorites">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span>Fav</span>
+    </button>
+  </nav>
+
+  <!-- ==========================================================================
+       4. FOOTER ARCA (Consistente con el sistema)
+       ========================================================================== -->
+  <footer class="arca-footer-component">
+    <div class="arca-footer-container">
+      <div class="arca-footer-grid">
+        
+        <div class="footer-brand-col">
+          <div class="arca-logo-link footer-logo">
+            <div class="logo-icon-wrapper">
+              <svg class="arca-logo-svg" viewBox="0 0 24 24" fill="none"><path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+            </div>
+            <div class="logo-brand-details">
+              <span class="logo-title">ARCA</span>
+              <span class="logo-subtitle">RADIO STREAMING</span>
+            </div>
+          </div>
+          <p class="footer-tagline">La plataforma de radio streaming de nueva generación. Conexión de alta fidelidad, emisoras en vivo y podcasts exclusivos.</p>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">ESCUCHA</h4>
+          <ul class="footer-links-list">
+            <li><a href="#" class="footer-link">En vivo</a></li>
+            <li><a href="#" class="footer-link">Programas de Radio</a></li>
+            <li><a href="#" class="footer-link">Podcasts Exclusivos</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">DESCUBRE</h4>
+          <ul class="footer-links-list">
+            <li><a href="#" class="footer-link">Estaciones HD</a></li>
+            <li><a href="#" class="footer-link">Categorías & Géneros</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links-col">
+          <h4 class="footer-col-title">AYUDA</h4>
+          <ul class="footer-links-list">
+            <li><a href="#" class="footer-link">Centro de Ayuda</a></li>
+            <li><a href="#" class="footer-link">Términos & Privacidad</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="arca-footer-bottom">
+        <div class="copyright-text">© 2026 ARCA RADIO STREAMING PLATFORM. Todos los derechos reservados.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       5. MODALES INTERACTIVOS (COMPARTIR & ME GUSTA)
+       ========================================================================== -->
+  <!-- MODAL COMPARTIR -->
+  <div class="arca-modal-backdrop hidden" id="share-modal">
+    <div class="arca-modal-card">
+      <button class="modal-close-btn" id="share-modal-close">&times;</button>
+      <div class="modal-header-icon">🔗</div>
+      <h3>Compartir Emisión de ARCA</h3>
+      <p>Sintoniza <strong>ARCA 96.5 FM</strong> en vivo con tus amigos y redes.</p>
+
+      <div class="share-options-grid">
+        <button class="share-opt-btn" data-share="whatsapp">
+          <span class="share-icon">🟢</span>
+          <span>WhatsApp</span>
+        </button>
+        <button class="share-opt-btn" data-share="twitter">
+          <span class="share-icon">🔵</span>
+          <span>X / Twitter</span>
+        </button>
+        <button class="share-opt-btn" data-share="facebook">
+          <span class="share-icon">🔷</span>
+          <span>Facebook</span>
+        </button>
+        <button class="share-opt-btn" data-share="telegram">
+          <span class="share-icon">✈️</span>
+          <span>Telegram</span>
+        </button>
+      </div>
+
+      <div class="copy-link-box">
+        <input type="text" id="share-url-input" value="https://arca.radio/live/arca-965" readonly>
+        <button id="btn-copy-url">Copiar Link</button>
+      </div>
+      <span class="copy-success-msg hidden" id="copy-success-msg">¡Enlace copiado al portapapeles! ⚡</span>
+    </div>
+  </div>
+
+  <!-- TOAST FAVORITO -->
+  <div class="favorite-toast hidden" id="favorite-toast">
+    <span class="toast-heart">❤️</span>
+    <span id="toast-message">¡Añadido a tus emisoras favoritas de ARCA!</span>
+  </div>
+
+  <!-- Application JS del Player -->
+  <script src="js/arca-player.js"></script>
+</body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARCA — Componentes Navbar & Footer Profesional (Radio Streaming)</title>
+  <meta name="description" content="Especificación y prototipo interactivo definitivo de los componentes Navbar (con Efecto Lámpara Spotlight) y Footer Profesional de la plataforma ARCA Radio Streaming.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       SHOWCASE STUDIO CONTROLS (Solo para pruebas e inspección de estados)
+       ========================================================================== -->
+  <aside class="showcase-bar" aria-label="Panel de Control de la Lámina">
+    <div class="showcase-bar-content">
+      <div class="showcase-brand">
+        <span class="badge-studio">LÁMINA DE DISEÑO & PROTOTIPO</span>
+        <strong>ARCA DESIGN SYSTEM (NAVBAR + FOOTER)</strong>
+      </div>
+
+      <div class="showcase-controls">
+        <!-- Control de Tema -->
+        <div class="control-group">
+          <label for="theme-selector">Modo Visión:</label>
+          <button id="theme-toggle-btn" class="showcase-btn" title="Alternar entre Dark Mode y Light Mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <span id="theme-label-text">Dark Mode</span>
+          </button>
+        </div>
+
+        <!-- Selector de Item Activo -->
+        <div class="control-group">
+          <label>Item Activo (Efecto Lámpara):</label>
+          <div class="pill-selector" id="active-item-pills">
+            <button data-item="inicio" class="pill-btn active">Inicio</button>
+            <button data-item="live" class="pill-btn">En vivo</button>
+            <button data-item="stations" class="pill-btn">Estaciones</button>
+            <button data-item="programs" class="pill-btn">Programas</button>
+            <button data-item="podcasts" class="pill-btn">Podcasts</button>
+          </div>
+        </div>
+
+        <!-- Modo de Visualización -->
+        <div class="control-group">
+          <label>Vista de Lámina:</label>
+          <div class="view-mode-buttons">
+            <button id="view-interactive-btn" class="showcase-btn active">Vista Interactiva Responsiva</button>
+            <button id="view-sheet-btn" class="showcase-btn">Lámina 4 Modos (Grilla)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================================================
+       VISTA 1: INTERACTIVA Y RESPONSIVA (Live Component Sandbox)
+       ========================================================================== -->
+  <main id="interactive-workspace" class="interactive-workspace">
+
+    <!-- ARCA DESKTOP NAVBAR COMPONENT -->
+    <header class="arca-navbar-desktop" id="arca-desktop-navbar" role="banner">
+      <div class="arca-navbar-container">
+        
+        <!-- IZQUIERDA: ArcaLogo -->
+        <div class="arca-logo-component">
+          <a href="#" class="arca-logo-link" aria-label="ARCA Radio Streaming - Ir a inicio">
+            <div class="logo-icon-wrapper">
+              <svg class="arca-logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="logo-brand-details">
+              <span class="logo-title">ARCA</span>
+              <span class="logo-subtitle">RADIO STREAMING</span>
+            </div>
+          </a>
+        </div>
+
+        <!-- CENTRO: DesktopNavigation + Lamp Effect Spotlight -->
+        <nav class="arca-desktop-nav" aria-label="Navegación principal desktop">
+          <!-- Elemento Lámpara Deslizable Único -->
+          <div class="lamp-spotlight-desktop" id="lamp-desktop" aria-hidden="true">
+            <div class="lamp-top-bar"></div>
+            <div class="lamp-light-cone"></div>
+            <div class="lamp-glow-point"></div>
+          </div>
+
+          <ul class="arca-nav-list" id="desktop-nav-list" role="menubar">
+            
+            <li role="none">
+              <button role="menuitem" class="arca-nav-link active" data-nav="inicio" id="nav-item-inicio" tabindex="0">
+                <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                <span class="nav-text">Inicio</span>
+              </button>
+            </li>
+
+            <li role="none">
+              <button role="menuitem" class="arca-nav-link" data-nav="live" id="nav-item-live" tabindex="0">
+                <span class="live-dot-indicator" aria-hidden="true"></span>
+                <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9c3.9 3.9 3.9 10.3 0 14.2"/></svg>
+                <span class="nav-text">En vivo</span>
+              </button>
+            </li>
+
+            <li role="none">
+              <button role="menuitem" class="arca-nav-link" data-nav="stations" id="nav-item-stations" tabindex="0">
+                <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M6 16h12"/><path d="M12 2v5"/></svg>
+                <span class="nav-text">Estaciones</span>
+              </button>
+            </li>
+
+            <li role="none">
+              <button role="menuitem" class="arca-nav-link" data-nav="programs" id="nav-item-programs" tabindex="0">
+                <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+                <span class="nav-text">Programas</span>
+              </button>
+            </li>
+
+            <li role="none">
+              <button role="menuitem" class="arca-nav-link" data-nav="podcasts" id="nav-item-podcasts" tabindex="0">
+                <svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+                <span class="nav-text">Podcasts</span>
+              </button>
+            </li>
+
+          </ul>
+        </nav>
+
+        <!-- DERECHA: UtilityActions, ThemeToggle, ProfileButton -->
+        <div class="arca-utility-actions">
+          
+          <button class="arca-action-btn" id="btn-search" aria-label="Buscar en ARCA" title="Buscar (Ctrl+K)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <span class="tooltip">Buscar</span>
+          </button>
+
+          <button class="arca-action-btn" id="btn-favorites" aria-label="Ver Favoritos" title="Mis Favoritos">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            <span class="tooltip">Favoritos</span>
+          </button>
+
+          <button class="arca-action-btn theme-toggle-nav-btn" id="btn-nav-theme-toggle" aria-label="Cambiar tema de color" title="Alternar Modo Oscuro/Claro">
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            <span class="tooltip">Tema</span>
+          </button>
+
+          <div class="arca-profile-menu">
+            <button class="arca-profile-btn" id="btn-profile" aria-label="Perfil de usuario" aria-haspopup="true">
+              <div class="avatar-ring">
+                <svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              </div>
+              <span class="status-indicator-dot" title="En línea"></span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ÁREA DE DEMOSTRACIÓN DE FONDO -->
+    <section class="demo-viewport-canvas">
+      <div class="canvas-ambient-glow"></div>
+      
+      <div class="canvas-hero-mock">
+        <div class="hero-chip">
+          <span class="chip-pulse"></span>
+          <span>SISTEMA DE NAVBAR & FOOTER ARCA</span>
+        </div>
+        <h1 class="hero-title">ARCA Radio Streaming Platform</h1>
+        <p class="hero-subtitle">
+          Selecciona cualquier opción del menú para presenciar el deslizamiento suave del <strong>Efecto Lámpara Morado</strong> y deslízate hacia abajo para explorar el <strong>Footer Profesional de ARCA</strong>.
+        </p>
+
+        <!-- Indicador de Estado Activo Actual -->
+        <div class="active-state-card">
+          <span class="card-label">SECCIÓN ACTUALMENTE ENFOCADA POR LA LÁMPARA:</span>
+          <div class="card-value-display">
+            <span id="active-item-name">INICIO</span>
+            <span class="lamp-status-badge">⚡ LÁMPARA ACTIVA</span>
+          </div>
+        </div>
+
+        <!-- Demostración de Especificaciones -->
+        <div class="states-preview-row">
+          <span class="states-title">Especificaciones Técnicas:</span>
+          <div class="states-tags">
+            <span class="tag">Font: Manrope 800/600</span>
+            <span class="tag">Color: Morado ARCA (#8A2BE2)</span>
+            <span class="tag">Transición: 350ms Cubic-Bezier</span>
+            <span class="tag">Glassmorphism: Blur 20px</span>
+            <span class="tag">Ready: Angular Component</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         ARCA FOOTER COMPONENT
+         ========================================================================== -->
+    <footer class="arca-footer-component" id="arca-footer" role="contentinfo">
+      <div class="arca-footer-container">
+        
+        <!-- PARTE SUPERIOR: GRID DE COLUMNAS -->
+        <div class="arca-footer-grid">
+          
+          <!-- COLUMNA 1: BRAND DETAIL -->
+          <div class="footer-brand-col">
+            <div class="arca-logo-link footer-logo">
+              <div class="logo-icon-wrapper">
+                <svg class="arca-logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="logo-brand-details">
+                <span class="logo-title">ARCA</span>
+                <span class="logo-subtitle">RADIO STREAMING</span>
+              </div>
+            </div>
+            <p class="footer-tagline">
+              La plataforma de radio streaming de nueva generación. Conexión de alta fidelidad, emisoras en vivo y podcasts exclusivos.
+            </p>
+            <div class="footer-stream-status">
+              <span class="status-badge-dot"></span>
+              <span class="status-badge-text">ARCA STREAM ENGINE v2.4 ONLINE</span>
+            </div>
+            <!-- Social Networks -->
+            <div class="footer-social-row">
+              <a href="#" class="social-icon-btn" aria-label="Instagram de ARCA">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="#" class="social-icon-btn" aria-label="Facebook de ARCA">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="#" class="social-icon-btn" aria-label="X (Twitter) de ARCA">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
+              </a>
+              <a href="#" class="social-icon-btn" aria-label="YouTube de ARCA">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- COLUMNA 2: ESCUCHA -->
+          <div class="footer-links-col">
+            <h4 class="footer-col-title">ESCUCHA</h4>
+            <ul class="footer-links-list">
+              <li><a href="#" class="footer-link" data-nav="live">En vivo</a></li>
+              <li><a href="#" class="footer-link" data-nav="programs">Programas de Radio</a></li>
+              <li><a href="#" class="footer-link" data-nav="podcasts">Podcasts Exclusivos</a></li>
+              <li><a href="#" class="footer-link">Favoritos</a></li>
+              <li><a href="#" class="footer-link">Top 10 Semanal</a></li>
+            </ul>
+          </div>
+
+          <!-- COLUMNA 3: DESCUBRE -->
+          <div class="footer-links-col">
+            <h4 class="footer-col-title">DESCUBRE</h4>
+            <ul class="footer-links-list">
+              <li><a href="#" class="footer-link" data-nav="stations">Estaciones HD</a></li>
+              <li><a href="#" class="footer-link">Categorías & Géneros</a></li>
+              <li><a href="#" class="footer-link">Novedades</a></li>
+              <li><a href="#" class="footer-link">Radio a la Carta</a></li>
+              <li><a href="#" class="footer-link">Artistas Destacados</a></li>
+            </ul>
+          </div>
+
+          <!-- COLUMNA 4: ARCA PLATAFORMA -->
+          <div class="footer-links-col">
+            <h4 class="footer-col-title">ARCA</h4>
+            <ul class="footer-links-list">
+              <li><a href="#" class="footer-link">Sobre ARCA</a></li>
+              <li><a href="#" class="footer-link">Contacto</a></li>
+              <li><a href="#" class="footer-link">Prensa</a></li>
+              <li><a href="#" class="footer-link">Trabaja con nosotros</a></li>
+              <li><a href="#" class="footer-link">Desarrolladores API</a></li>
+            </ul>
+          </div>
+
+          <!-- COLUMNA 5: AYUDA Y LEGAL -->
+          <div class="footer-links-col">
+            <h4 class="footer-col-title">AYUDA & LEGAL</h4>
+            <ul class="footer-links-list">
+              <li><a href="#" class="footer-link">Centro de Ayuda</a></li>
+              <li><a href="#" class="footer-link">Términos de Uso</a></li>
+              <li><a href="#" class="footer-link">Política de Privacidad</a></li>
+              <li><a href="#" class="footer-link">Política de Cookies</a></li>
+              <li><a href="#" class="footer-link">Configuración de Cookies</a></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- PARTE INFERIOR: BARRA DE COPYRIGHT Y CONFIGURACIÓN -->
+        <div class="arca-footer-bottom">
+          <div class="copyright-text">
+            © 2026 ARCA RADIO STREAMING PLATFORM. Todos los derechos reservados.
+          </div>
+          
+          <div class="footer-bottom-selectors">
+            <div class="region-selector">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="globe-icon"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <span>Global / Español</span>
+            </div>
+            <span class="bottom-divider">|</span>
+            <div class="footer-badge-tech">
+              <span>POWERED BY ARCA AUDIO ENGINE</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- ARCA MOBILE BOTTOM NAVBAR COMPONENT (Cápsula Flotante) -->
+    <nav class="arca-navbar-mobile" id="arca-mobile-navbar" aria-label="Navegación inferior móvil">
+      <div class="arca-mobile-capsule">
+        
+        <!-- Lámpara Móvil Deslizable -->
+        <div class="lamp-spotlight-mobile" id="lamp-mobile" aria-hidden="true">
+          <div class="lamp-top-bar"></div>
+          <div class="lamp-light-cone"></div>
+        </div>
+
+        <ul class="arca-mobile-nav-list">
+          
+          <li>
+            <button class="arca-mobile-item active" data-nav="inicio">
+              <svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <span class="mobile-label">Inicio</span>
+            </button>
+          </li>
+
+          <li>
+            <button class="arca-mobile-item" data-nav="live">
+              <svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9c3.9 3.9 3.9 10.3 0 14.2"/></svg>
+              <span class="mobile-label">En vivo</span>
+            </button>
+          </li>
+
+          <li>
+            <button class="arca-mobile-item" data-nav="stations">
+              <svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M6 12h.01"/><path d="M10 12h.01"/><path d="M14 12h.01"/><path d="M18 12h.01"/><path d="M6 16h12"/><path d="M12 2v5"/></svg>
+              <span class="mobile-label">Estaciones</span>
+            </button>
+          </li>
+
+          <li>
+            <button class="arca-mobile-item" data-nav="programs">
+              <svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+              <span class="mobile-label">Programas</span>
+            </button>
+          </li>
+
+          <li>
+            <button class="arca-mobile-item" data-nav="podcasts">
+              <svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+              <span class="mobile-label">Podcasts</span>
+            </button>
+          </li>
+
+        </ul>
+      </div>
+    </nav>
+
+  </main>
+
+
+  <!-- ==========================================================================
+       VISTA 2: LÁMINA COMPLETA DE ENTREGABLE (Grilla Comparativa 4 Variantes)
+       A. Desktop Dark Mode | B. Desktop Light Mode | C. Mobile Dark Mode | D. Mobile Light Mode
+       ========================================================================== -->
+  <section id="sheet-workspace" class="sheet-workspace hidden">
+    <div class="sheet-container">
+      
+      <header class="sheet-header">
+        <h1>ARCA SYSTEM — LÁMINA DE DISEÑO DEFINITIVA (NAVBAR + FOOTER)</h1>
+        <p>Especificación visual y comparativa de los 4 estados principales (Desktop/Mobile × Dark/Light Mode) y matriz de interacciones de los componentes.</p>
+      </header>
+
+      <!-- SECCIÓN A: DESKTOP DARK MODE -->
+      <article class="sheet-card dark-preview-bg">
+        <div class="sheet-card-meta">
+          <span class="section-badge">MODO A</span>
+          <h3>Desktop — Dark Mode (Navbar & Footer System)</h3>
+        </div>
+        <div class="mock-nav-frame dark-theme-scope">
+          <!-- Static Desktop Navbar Dark -->
+          <div class="arca-navbar-desktop static-nav">
+            <div class="arca-navbar-container">
+              <div class="arca-logo-component">
+                <div class="arca-logo-link">
+                  <div class="logo-icon-wrapper"><svg class="arca-logo-svg" viewBox="0 0 24 24" fill="none"><path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+                  <div class="logo-brand-details"><span class="logo-title">ARCA</span><span class="logo-subtitle">RADIO STREAMING</span></div>
+                </div>
+              </div>
+              <nav class="arca-desktop-nav">
+                <div class="lamp-spotlight-desktop active-on-first">
+                  <div class="lamp-top-bar"></div>
+                  <div class="lamp-light-cone"></div>
+                  <div class="lamp-glow-point"></div>
+                </div>
+                <ul class="arca-nav-list">
+                  <li><div class="arca-nav-link active"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Inicio</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/></svg><span>En vivo</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg><span>Estaciones</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg><span>Programas</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg><span>Podcasts</span></div></li>
+                </ul>
+              </nav>
+              <div class="arca-utility-actions">
+                <div class="arca-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <div class="arca-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                <div class="arca-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></div>
+                <div class="arca-profile-btn"><div class="avatar-ring"><svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECCIÓN B: DESKTOP LIGHT MODE -->
+      <article class="sheet-card light-preview-bg">
+        <div class="sheet-card-meta">
+          <span class="section-badge light">MODO B</span>
+          <h3>Desktop — Light Mode (Superficie Clara Pulcra)</h3>
+        </div>
+        <div class="mock-nav-frame light-theme-scope">
+          <!-- Static Desktop Navbar Light -->
+          <div class="arca-navbar-desktop static-nav">
+            <div class="arca-navbar-container">
+              <div class="arca-logo-component">
+                <div class="arca-logo-link">
+                  <div class="logo-icon-wrapper"><svg class="arca-logo-svg" viewBox="0 0 24 24" fill="none"><path d="M4 12V14M8 8V18M12 3V21M16 7V17M20 11V13" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></div>
+                  <div class="logo-brand-details"><span class="logo-title">ARCA</span><span class="logo-subtitle">RADIO STREAMING</span></div>
+                </div>
+              </div>
+              <nav class="arca-desktop-nav">
+                <div class="lamp-spotlight-desktop active-on-first">
+                  <div class="lamp-top-bar"></div>
+                  <div class="lamp-light-cone"></div>
+                  <div class="lamp-glow-point"></div>
+                </div>
+                <ul class="arca-nav-list">
+                  <li><div class="arca-nav-link active"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span>Inicio</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/></svg><span>En vivo</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg><span>Estaciones</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/></svg><span>Programas</span></div></li>
+                  <li><div class="arca-nav-link"><svg class="arca-nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg><span>Podcasts</span></div></li>
+                </ul>
+              </nav>
+              <div class="arca-utility-actions">
+                <div class="arca-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+                <div class="arca-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                <div class="arca-action-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></div>
+                <div class="arca-profile-btn"><div class="avatar-ring"><svg class="avatar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECCIÓN C & D: MOBILE DARK & LIGHT MODE -->
+      <div class="sheet-grid-two">
+        
+        <article class="sheet-card dark-preview-bg">
+          <div class="sheet-card-meta">
+            <span class="section-badge">MODO C</span>
+            <h3>Mobile — Dark Mode (Cápsula Flotante)</h3>
+          </div>
+          <div class="mobile-frame-mock dark-theme-scope">
+            <div class="arca-mobile-capsule static-mobile">
+              <div class="lamp-spotlight-mobile active-on-first">
+                <div class="lamp-top-bar"></div>
+                <div class="lamp-light-cone"></div>
+              </div>
+              <ul class="arca-mobile-nav-list">
+                <li><div class="arca-mobile-item active"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="mobile-label">Inicio</span></div></li>
+                <li><div class="arca-mobile-item"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/></svg><span class="mobile-label">En vivo</span></div></li>
+                <li><div class="arca-mobile-item"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg><span class="mobile-label">Estaciones</span></div></li>
+                <li><div class="arca-mobile-item"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg><span class="mobile-label">Podcasts</span></div></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+        <article class="sheet-card light-preview-bg">
+          <div class="sheet-card-meta">
+            <span class="section-badge light">MODO D</span>
+            <h3>Mobile — Light Mode (Cápsula Clara)</h3>
+          </div>
+          <div class="mobile-frame-mock light-theme-scope">
+            <div class="arca-mobile-capsule static-mobile">
+              <div class="lamp-spotlight-mobile active-on-first">
+                <div class="lamp-top-bar"></div>
+                <div class="lamp-light-cone"></div>
+              </div>
+              <ul class="arca-mobile-nav-list">
+                <li><div class="arca-mobile-item active"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="mobile-label">Inicio</span></div></li>
+                <li><div class="arca-mobile-item"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2"/></svg><span class="mobile-label">En vivo</span></div></li>
+                <li><div class="arca-mobile-item"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg><span class="mobile-label">Estaciones</span></div></li>
+                <li><div class="arca-mobile-item"><svg class="mobile-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/></svg><span class="mobile-label">Podcasts</span></div></li>
+              </ul>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- MATRIZ DE ESTADOS E INTERACCIONES DE LA LÁMPARA -->
+      <article class="sheet-card">
+        <div class="sheet-card-meta">
+          <span class="section-badge">INTERACTIVIDAD</span>
+          <h3>Matriz de Transición del Efecto Lámpara (5 Opciones)</h3>
+        </div>
+        <div class="matrix-preview-container">
+          <p class="matrix-desc">Al hacer clic en cualquier opción, la lámpara realiza una animación compuesta: <strong>Slide (Desplazamiento horizontal X) + Glow Pulse (Modulación de haz luminosa) + Color Focus</strong>.</p>
+          <div class="matrix-items-row">
+            <div class="matrix-item">
+              <span class="step-num">01</span>
+              <strong>Inicio</strong>
+              <small>Lámpara en Posición 1 (Default)</small>
+            </div>
+            <div class="matrix-arrow">➔</div>
+            <div class="matrix-item">
+              <span class="step-num">02</span>
+              <strong>En vivo</strong>
+              <small>Slide 120px + Red Pulse</small>
+            </div>
+            <div class="matrix-arrow">➔</div>
+            <div class="matrix-item">
+              <span class="step-num">03</span>
+              <strong>Estaciones</strong>
+              <small>Slide 240px + Smooth Glow</small>
+            </div>
+            <div class="matrix-arrow">➔</div>
+            <div class="matrix-item">
+              <span class="step-num">04</span>
+              <strong>Programas</strong>
+              <small>Slide 360px + Mic Accent</small>
+            </div>
+            <div class="matrix-arrow">➔</div>
+            <div class="matrix-item">
+              <span class="step-num">05</span>
+              <strong>Podcasts</strong>
+              <small>Slide 480px + Headphone Focus</small>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
